@@ -15,5 +15,14 @@
       <description>Introduction This project centers around American health. I first chose two datasets from the CDC&#39;s BRFSS Prevalence &amp;amp; Trends Data, both from 2019. One of these data sets contained information regarding weight using the metric of BMI, specifically examining the percentage of the population in each BMI category by state. The original data included 28 columns, and most of these were formatting for the CDC&#39;s system of display. The variables I used from this data set included state, percentage underweight, percentage normal weight, percentage overweight, and percentage obese.</description>
     </item>
     
+    <item>
+      <title>Project 2: COVID-19 and Risk Factors</title>
+      <link>/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project2/</guid>
+      <description>Introduction In this project, all new data used came from the Center for Disease Control. I combined 5 datasets, one of these being a partial set from project one. This set included region classifications and percentages of each state&#39;s population that were classified as &amp;quot;obese.&amp;quot; That is, having a BMI of 30 or greater. Other sets included the percentages of each state that smoke, have angina or coronary heart disease, or have COPD.</description>
+    </item>
+    
   </channel>
 </rss>
