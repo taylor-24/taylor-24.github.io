@@ -1,7 +1,7 @@
 ---
 title: "Project 2: COVID-19 and Risk Factors"
 author: "Taylor Stephenson, TNS742"
-date: "11/21/2020"
+date: "2020-11-21"
 output: html_document
 ---
 

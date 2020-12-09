@@ -60,7 +60,7 @@
  
 <div class="blog-title">
           <h4>
-         January 1, 0001 
+         November 21, 2020 
             &nbsp;&nbsp;
             
           </h4>
@@ -357,8 +357,8 @@ coeftest(fit1, vcov = vcovHC(fit1))</code></pre>
 })
 
 samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd)</code></pre>
-<pre><code>##   (Intercept)  Heart_c   COPD_c Heart_c:COPD_c
-## 1    5.965709 13.85187 7.435727       1.586676</code></pre>
+<pre><code>##   (Intercept) Heart_c   COPD_c Heart_c:COPD_c
+## 1    6.094971 13.5991 7.307652       1.616015</code></pre>
 <p>Here I chose to bootstrap standard errors by resampling observations. These standard errors are again only slightly different than the original regression. Because of this, the p-values and all significant values would still remain the same.</p>
 </div>
 <div id="logistic-regression" class="section level2">
@@ -496,8 +496,8 @@ for (i in 1:k) {
     diags &lt;- rbind(diags, class_diag(probs, truth))
 }
 summarize_all(diags, mean)</code></pre>
-<pre><code>##   acc sens spec ppv  f1       auc
-## 1 NaN  NaN  NaN NaN NaN 0.8666667</code></pre>
+<pre><code>##   acc sens spec ppv  f1 auc
+## 1 NaN  NaN  NaN NaN NaN 0.7</code></pre>
 <p>After performing a 10-fold cross validation, I computed the out of sample classification diagnostics. Accuracy was 0.7, sensitivity was 0.69, specificity was 0.63, precision was 0.59, and AUC was 0.75. These diagnostics showed a decrease of approximately 0.1-0.16 from the in-sample diagnostics, including in the AUC.</p>
 <pre class="r"><code># LASSO
 preds &lt;- model.matrix(deaths2)[, -1]
@@ -506,15 +506,15 @@ cv &lt;- cv.glmnet(preds, resp, family = &quot;binomial&quot;)
 lasso_fit &lt;- glmnet(preds, resp, family = &quot;binomial&quot;, lambda = cv$lambda.1se)
 coef(lasso_fit)</code></pre>
 <pre><code>## 9 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                         s0
-## (Intercept)     -0.2047944
-## PercentSmoker    0.0000000
-## Obese            .        
-## CaseRate         .        
-## RegionNortheast  .        
-## RegionSouth      .        
-## RegionWest       .        
-## HeartDisease     .        
+##                            s0
+## (Intercept)      2.202446e-02
+## PercentSmoker    .           
+## Obese            .           
+## CaseRate         9.393374e-07
+## RegionNortheast  .           
+## RegionSouth      .           
+## RegionWest      -9.215674e-01
+## HeartDisease     .           
 ## COPD             .</code></pre>
 <pre class="r"><code># 10-Fold CV #2
 binproj2 &lt;- binproj %&gt;% mutate(West = ifelse(Region == &quot;West&quot;, 
@@ -535,8 +535,8 @@ for (i in 1:k) {
     diags &lt;- rbind(diags, class_diag(probs, truth))
 }
 summarize_all(diags, mean)</code></pre>
-<pre><code>##   acc sens spec ppv  f1    auc
-## 1 NaN  NaN  NaN NaN NaN 0.7375</code></pre>
+<pre><code>##   acc sens spec ppv  f1  auc
+## 1 NaN  NaN  NaN NaN NaN 0.75</code></pre>
 <p>After performing LASSO on the model, the only variable that was retained was RegionWest. I performed a 10-fold cross validation once again and found the accuracy to be 0.68, the sensitivity to be 0.98, the specificity to be 0.42, the precision to be 0.59, and the AUC to be 0.7. This means that narrowing down the variables made the model perform less well at detecting whether a state is above or below the mean death rate.</p>
 </div>
 <div id="conclusion" class="section level2">
