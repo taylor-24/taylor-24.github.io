@@ -7,7 +7,7 @@
     <meta name="author" content="Taylor Stephenson" />
     
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
-    <title>Project 1</title>
+    <title>Project 1: Health Across the States</title>
     <meta name="generator" content="Hugo 0.79.0" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../css/main.css" />
@@ -54,13 +54,13 @@
       <div class="container">
         <div class="blog-post">
           <h3>
-            <strong><a href="../../project/project1/">Project 1</a></strong>
+            <strong><a href="../../project/project1/">Project 1: Health Across the States</a></strong>
           </h3>
         </div>
  
 <div class="blog-title">
           <h4>
-         December 1, 2020 
+         January 1, 0001 
             &nbsp;&nbsp;
             
           </h4>
@@ -72,8 +72,281 @@
               
 
 
-<div id="test-project-1" class="section level2">
-<h2>Test Project 1</h2>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This project centers around American health. I first chose two datasets from the CDC's BRFSS Prevalence &amp; Trends Data, both from 2019. One of these data sets contained information regarding weight using the metric of BMI, specifically examining the percentage of the population in each BMI category by state. The original data included 28 columns, and most of these were formatting for the CDC's system of display. The variables I used from this data set included state, percentage underweight, percentage normal weight, percentage overweight, and percentage obese. The second data set featured information regarding diabetes, specifically the percentage of the population that is diabetic per state. The original data again included a 28 columns, and again most of these were formatting or logistical. The variables I used from this data included the state, diabetic status, and the percentage of the population for the status specified. Additionally, I included a third data set simply consisting of regions and divisions into which the United States can be divided. The original data set contained four variables: state, state abbreviation, region, and division. I used all except the abbreviation column.</p>
+<p>As mentioned previously, I aquired the first two datasets from the CDC. The third I found on the website of a datascience company called Kaggle. These datasets were interesting to me because I enjoy health science and population data. The interconnected relationship between diet and diabetes is well know, and I was curious to see if these real world data sets would reflect that. For one specific example, I was interested to see whether there would be an increase in diabetes in states or regions that had populations with higher average BMIs.</p>
+</div>
+<div id="preview" class="section level2">
+<h2>Preview</h2>
+<p>Below I give previews of the original data sets.</p>
+<pre class="r"><code># For the diabetes data set:
+head(ExportCSV)</code></pre>
+<pre><code>## # A tibble: 6 x 28
+##       ID  Year LocationAbbr LocationDesc Class Topic Indicator Response
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   
+## 1 3.65e6  2019 US           All States,… Chro… Diab… Have you… Yes     
+## 2 3.65e6  2019 US           All States,… Chro… Diab… Have you… Yes, pr…
+## 3 3.65e6  2019 US           All States,… Chro… Diab… Have you… No, pre…
+## 4 3.65e6  2019 US           All States,… Chro… Diab… Have you… No      
+## 5 3.65e6  2019 UW           All States … Chro… Diab… Have you… Yes     
+## 6 3.65e6  2019 UW           All States … Chro… Diab… Have you… Yes, pr…
+## # … with 20 more variables: DataSource &lt;chr&gt;, Data_Value_Unit &lt;chr&gt;,
+## #   Data_Value_Type &lt;chr&gt;, Data_Value &lt;chr&gt;, Data_Value_Footnote_Symbol &lt;chr&gt;,
+## #   Data_Value_Footnote &lt;chr&gt;, Low_Confidence_Limit &lt;dbl&gt;,
+## #   High_Confidence_Limit &lt;dbl&gt;, Sample_Size &lt;dbl&gt;, Stratification &lt;chr&gt;,
+## #   StratificationType &lt;chr&gt;, IndicatorId &lt;chr&gt;, LocationOrder &lt;dbl&gt;,
+## #   ParentStateDisplayOrder &lt;dbl&gt;, FootnoteType &lt;chr&gt;, FootNoteSymbol &lt;chr&gt;,
+## #   FootnoteText &lt;chr&gt;, URL &lt;chr&gt;, DatasourceAbbr &lt;chr&gt;, Agency &lt;chr&gt;</code></pre>
+<pre class="r"><code># For the BMI data set:
+head(ObeseExport)</code></pre>
+<pre><code>## # A tibble: 6 x 28
+##       ID  Year LocationAbbr LocationDesc Class Topic Indicator Response
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   
+## 1 3.65e6  2019 US           All States,… Over… BMI … Weight c… Obese (…
+## 2 3.65e6  2019 US           All States,… Over… BMI … Weight c… Overwei…
+## 3 3.65e6  2019 US           All States,… Over… BMI … Weight c… Normal …
+## 4 3.65e6  2019 US           All States,… Over… BMI … Weight c… Underwe…
+## 5 3.65e6  2019 UW           All States … Over… BMI … Weight c… Obese (…
+## 6 3.65e6  2019 UW           All States … Over… BMI … Weight c… Overwei…
+## # … with 20 more variables: DataSource &lt;chr&gt;, Data_Value_Unit &lt;chr&gt;,
+## #   Data_Value_Type &lt;chr&gt;, Data_Value &lt;dbl&gt;, Data_Value_Footnote_Symbol &lt;lgl&gt;,
+## #   Data_Value_Footnote &lt;lgl&gt;, Low_Confidence_Limit &lt;dbl&gt;,
+## #   High_Confidence_Limit &lt;dbl&gt;, Sample_Size &lt;dbl&gt;, Stratification &lt;chr&gt;,
+## #   StratificationType &lt;chr&gt;, IndicatorId &lt;chr&gt;, LocationOrder &lt;dbl&gt;,
+## #   ParentStateDisplayOrder &lt;dbl&gt;, FootnoteType &lt;chr&gt;, FootNoteSymbol &lt;chr&gt;,
+## #   FootnoteText &lt;chr&gt;, URL &lt;chr&gt;, DatasourceAbbr &lt;chr&gt;, Agency &lt;chr&gt;</code></pre>
+<pre class="r"><code># For the region data set:
+head(states)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   State      `State Code` Region Division          
+##   &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;             
+## 1 Alaska     AK           West   Pacific           
+## 2 Alabama    AL           South  East South Central
+## 3 Arkansas   AR           South  West South Central
+## 4 Arizona    AZ           West   Mountain          
+## 5 California CA           West   Pacific           
+## 6 Colorado   CO           West   Mountain</code></pre>
+</div>
+<div id="tidyingcleaning" class="section level2">
+<h2>Tidying/Cleaning</h2>
+<p>In this section, I did a basic cut and parsing of the data to show only the desired variables.</p>
+<pre class="r"><code># Cleaning up the data to isolate the variables I want:
+tidyexport &lt;- ExportCSV %&gt;% select(1:8, 12:16)
+extratidy &lt;- tidyexport %&gt;% select(4, 8, 9)
+diabetesdata &lt;- extratidy %&gt;% filter(Response == &quot;Yes&quot;) %&gt;% select(-Response) %&gt;% 
+    rename(`Percent Diabetic` = Data_Value)
+
+tidyweight &lt;- ObeseExport %&gt;% select(4, 8, 12) %&gt;% na.omit
+untidyweight &lt;- tidyweight %&gt;% pivot_wider(names_from = Response, 
+    values_from = Data_Value)
+bmidata &lt;- untidyweight %&gt;% group_by(LocationDesc) %&gt;% fill(2:5) %&gt;% 
+    distinct() %&gt;% na.omit
+
+regiondata &lt;- states %&gt;% select(-&quot;State Code&quot;) %&gt;% rename(LocationDesc = State)</code></pre>
+<p>In the diabetes data, I used select to call only the columns relevant to the join and then filtered for the percentage of people who had diabetes for non-pregnancy related reasons. I then made the column with the percentages the sole column for the data outside of the states column, which I later used for joining.</p>
+<p>In the BMI data, I again used select to call relevant columns. Additionally, I got rid of the NAs in the data. The data originally had a column for the different BMI statuses and then another for percentages with separate rows for each category relating to each state. I used pivot wider to separate those into their own columns, with the percentages as the values in the columns. Finally, I put all the percentages in the same row for each state using fill and got rid of the excess rows leftover.</p>
+<p>In the region data, I simply used select to get rid of the abbreviations column and then renamed the column I later used to join the datasets to match that of the previous two.</p>
+</div>
+<div id="joining-the-data" class="section level2">
+<h2>Joining the Data</h2>
+<pre class="r"><code>projdata1 &lt;- full_join(diabetesdata, bmidata, by = &quot;LocationDesc&quot;)
+projdata &lt;- inner_join(projdata1, regiondata, by = &quot;LocationDesc&quot;)
+
+head(projdata)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   LocationDesc `Percent Diabet… `Obese (BMI 30.… `Overweight (BM…
+##   &lt;chr&gt;        &lt;chr&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Alabama      14                           36.1             34.2
+## 2 Alaska       7.3                          30.5             36.1
+## 3 Arizona      10.9                         31.4             34.4
+## 4 Arkansas     13.6                         37.4             33.2
+## 5 California   10.1                         26.2             36.7
+## 6 Colorado     7                            23.8             35.3
+## # … with 4 more variables: `Normal Weight (BMI 18.5-24.9)` &lt;dbl&gt;, `Underweight
+## #   (BMI 12.0-18.4)` &lt;dbl&gt;, Region &lt;chr&gt;, Division &lt;chr&gt;</code></pre>
+<p>After cleaning and rearranging each dataset, the CDC datasets both had 54 observations while the regions dataset had 51 observations. I decided to do a full join on the first two sets since they shared the same observations, then an inner join with the third set to cut out any differences. For both my joins, I joined by the state variable called &quot;LocationDesc.&quot; The resulting 50 observations feature one per state (excluding New Jersey, which was actually absent from both of the original CDC datasets due to insufficient information) plus the District of Columbia. Observations for Guam, Puerto Rico, median data for the US/DC/territories, and median data for the US/DC were dropped from the first two sets, and the observation for New Jersey was dropped from the third set. I decided to join the sets this way because I wanted to avoid any NAs in the project data and I wanted to restrict observations to just the states and DC.</p>
+<p>I noticed later that one of my numerical columns was typed as a character column, so I quickly changed that as well.</p>
+<pre class="r"><code>projdata$`Percent Diabetic` &lt;- as.numeric(as.character(projdata$`Percent Diabetic`))</code></pre>
+<p>Here's a preview of the data after joining:</p>
+<pre class="r"><code>head(projdata)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   LocationDesc `Percent Diabet… `Obese (BMI 30.… `Overweight (BM…
+##   &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Alabama                  14               36.1             34.2
+## 2 Alaska                    7.3             30.5             36.1
+## 3 Arizona                  10.9             31.4             34.4
+## 4 Arkansas                 13.6             37.4             33.2
+## 5 California               10.1             26.2             36.7
+## 6 Colorado                  7               23.8             35.3
+## # … with 4 more variables: `Normal Weight (BMI 18.5-24.9)` &lt;dbl&gt;, `Underweight
+## #   (BMI 12.0-18.4)` &lt;dbl&gt;, Region &lt;chr&gt;, Division &lt;chr&gt;</code></pre>
+</div>
+<div id="wrangling" class="section level2">
+<h2>Wrangling</h2>
+<p>This section of the document showcases a variety of summary statistics for the data. Each is labeled for reference in the explanation below.</p>
+<pre class="r"><code># Stats 1&amp;2
+projdata %&gt;% group_by(Region) %&gt;% summarize(mean(`Percent Diabetic`), 
+    sd(`Percent Diabetic`))</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   Region    `mean(\`Percent Diabetic\`)` `sd(\`Percent Diabetic\`)`
+##   &lt;chr&gt;                            &lt;dbl&gt;                      &lt;dbl&gt;
+## 1 Midwest                          10.4                       1.20 
+## 2 Northeast                         9.78                      0.930
+## 3 South                            12.6                       1.64 
+## 4 West                              9.28                      1.68</code></pre>
+<pre class="r"><code># Stat 3
+projdata &lt;- projdata %&gt;% mutate(sum = rowSums(.[3:4])) %&gt;% mutate(`70%+ Overweight or Obese?` = case_when(sum &gt;= 
+    70 ~ &quot;Yes&quot;, sum &lt; 70 ~ &quot;No&quot;)) %&gt;% select(-sum)
+
+# Stat 4
+projdata %&gt;% rename(SeventyOverorObese = &quot;70%+ Overweight or Obese?&quot;) %&gt;% 
+    group_by(Region, SeventyOverorObese) %&gt;% summarize(mean(`Percent Diabetic`))</code></pre>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   Region [4]
+##   Region    SeventyOverorObese `mean(\`Percent Diabetic\`)`
+##   &lt;chr&gt;     &lt;chr&gt;                                     &lt;dbl&gt;
+## 1 Midwest   No                                        10.5 
+## 2 Midwest   Yes                                       10.2 
+## 3 Northeast No                                         9.78
+## 4 South     No                                        11.8 
+## 5 South     Yes                                       13.7 
+## 6 West      No                                         9.28</code></pre>
+<pre class="r"><code># Stats 5, 6, 7, and 8
+projdata %&gt;% filter(&quot;South&quot; == Region) %&gt;% summarize(max(`Percent Diabetic`), 
+    min(`Percent Diabetic`), max(`Obese (BMI 30.0 - 99.8)`), 
+    min(`Obese (BMI 30.0 - 99.8)`))</code></pre>
+<pre><code>## # A tibble: 1 x 4
+##   `max(\`Percent Dia… `min(\`Percent Di… `max(\`Obese (BMI … `min(\`Obese (BMI …
+##                 &lt;dbl&gt;              &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;
+## 1                15.7                8.7                40.8                23.8</code></pre>
+<pre class="r"><code># Stat 9
+projdata %&gt;% rename(PD = &quot;Percent Diabetic&quot;) %&gt;% arrange(desc(PD)) %&gt;% 
+    summarize(last(LocationDesc))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   `last(LocationDesc)`
+##   &lt;chr&gt;               
+## 1 Colorado</code></pre>
+<pre class="r"><code># Stat 10
+projdata %&gt;% group_by(Region) %&gt;% rename(SeventyOverorObese = &quot;70%+ Overweight or Obese?&quot;) %&gt;% 
+    summarise(mean_reg = mean(&quot;Yes&quot; == SeventyOverorObese))</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   Region    mean_reg
+##   &lt;chr&gt;        &lt;dbl&gt;
+## 1 Midwest      0.25 
+## 2 Northeast    0    
+## 3 South        0.412
+## 4 West         0</code></pre>
+<pre class="r"><code># Stat 11
+projdata %&gt;% select(2, 3, 5) %&gt;% select_if(is.numeric) %&gt;% cor()</code></pre>
+<pre><code>##                               Percent Diabetic Obese (BMI 30.0 - 99.8)
+## Percent Diabetic                     1.0000000               0.7366918
+## Obese (BMI 30.0 - 99.8)              0.7366918               1.0000000
+## Normal Weight (BMI 18.5-24.9)       -0.6777331              -0.9478616
+##                               Normal Weight (BMI 18.5-24.9)
+## Percent Diabetic                                 -0.6777331
+## Obese (BMI 30.0 - 99.8)                          -0.9478616
+## Normal Weight (BMI 18.5-24.9)                     1.0000000</code></pre>
+<p>In stats one and two, I used group by and summarize to show that the mean rates of diabetes for each region are 10.45% for the Midwest (standard deviation: 1.20), 9.78% for the Northeast (sd:0.93), 12.62% for the South (sd:1.64), and 9.28% for the West (sd:1.68). In stat three I then used mutate to add a new categorical column that indicates whether or not a state's population is 70% or more overweight or obese. Using this new variable, I grouped by region and the overweight/obese variable to compare mean percent diabetic when a population is more or less than 70% obese or overweight for stat 4. Of the two regions that did have states with populations that were 70% or more overweight+, the Midwest showed a slight (~0.3%) decrease in the diabetic population in states that responded &quot;Yes,&quot; while the South showed an increase (~2%) in the diabetic population in states that responded &quot;Yes.&quot; For five through eight, I also wanted to know how diverse the South in particular was in terms of BMI and diabetes. Running min and max inside of summarize for a couple of variables told me that the difference between the most and least diabetic state was 7% of the population and the difference between the most and least obese state was 17%.</p>
+<p>In stat nine, I used last with summarize and desc with arrange to find that the state with the lowest diabetic population was Colorado. Through grouping by region and summarizing the proportion of states per region that had 70% or more of their population overweight or obese, I found (in stat ten) that the South had a nearly 2/5 increase in states with this high BMI status compared to the Midwest. Finally, I created a correlation matrix using select and cor functions for my final statistic. Note that in many of these statistics I briefly &quot;renamed&quot; the column I made with mutate because R didn't like all the symbols in the original name when doing other statistics.</p>
+</div>
+<div id="visualizing" class="section level2">
+<h2>Visualizing</h2>
+<p>My correlational heatmap for my numeric variables:</p>
+<pre class="r"><code>projdata %&gt;% select_if(is.numeric) %&gt;% cor %&gt;% as.data.frame %&gt;% 
+    rownames_to_column %&gt;% pivot_longer(-1) %&gt;% ggplot(aes(rowname, 
+    name, fill = value)) + geom_tile() + geom_text(aes(label = round(value, 
+    2))) + theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+    hjust = 1)) + xlab(&quot;&quot;) + ylab(&quot;&quot;) + coord_fixed()</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /> The most interesting correlations shown on the heatmap were that comparing percent diabetic with obese percentage and normal weight percentage. However, as this is relevant to the later discussion in the &quot;Dimensionality Reduction&quot; portion of this report, I will not expand upon that here.</p>
+<p>Plot #1:</p>
+<pre class="r"><code>projplot &lt;- projdata %&gt;% rename(PercentDiabetic = &quot;Percent Diabetic&quot;) %&gt;% 
+    rename(ow = &quot;70%+ Overweight or Obese?&quot;) %&gt;% rename(Obese = &quot;Obese (BMI 30.0 - 99.8)&quot;) %&gt;% 
+    rename(Overweight = &quot;Overweight (BMI 25.0-29.9)&quot;) %&gt;% rename(NormalWeight = &quot;Normal Weight (BMI 18.5-24.9)&quot;) %&gt;% 
+    rename(Underweight = &quot;Underweight (BMI 12.0-18.4)&quot;)
+
+ggplot(projplot, aes(x = reorder(LocationDesc, PercentDiabetic), 
+    y = PercentDiabetic, color = Region, shape = ow)) + theme(axis.text.x = element_text(angle = 45, 
+    vjust = 1, hjust = 1, size = 5)) + geom_point(size = 2.5) + 
+    ggtitle(&quot;Percentage of Population Diabetic by State, Region, and BMI&quot;) + 
+    xlab(&quot;State&quot;) + ylab(&quot;Portion Diabetic (%)&quot;) + scale_color_brewer(palette = &quot;Spectral&quot;) + 
+    labs(shape = &quot;70%+ Overweight or Obese?&quot;) + scale_y_continuous(breaks = seq(5, 
+    16, 2))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /> The plot showcases the percentage of the population of each state that is diabetic, while also relating that percentage to the region in which the state resides and whether or not that state has a population that is 70% or more overweight or obese. I've arranged the data so that the highest percentages of diabetics in the population are found on the rightmost portion of the graph. From the regional coloring across the data points, the trend seems to be that the West is generally the least diabetic, the Northeast and Midwest are mixed in the middle, and the South is generally the most diabetic. This seems to indicate that there are regional divides in the number of people who have diabetes. Additionally, the triangles representing the high BMI status are loosely arregated in the righthand portion of the graph, indicating a relationship between high BMI and higher numbers of diabetic people in the population.</p>
+<p>Plot #2:</p>
+<pre class="r"><code>projdata %&gt;% filter(Division == &quot;West South Central&quot;) %&gt;% pivot_longer(3:6, 
+    names_to = &quot;BMICategory&quot;, values_to = &quot;BMIPercentages&quot;) %&gt;% 
+    ggplot(aes(x = BMICategory, y = BMIPercentages, fill = LocationDesc)) + 
+    theme_minimal() + geom_bar(position = &quot;dodge&quot;, stat = &quot;summary&quot;, 
+    fun = mean) + ggtitle(&quot;BMI Categories in the West South Central Division&quot;) + 
+    xlab(&quot;BMI Category&quot;) + ylab(&quot;Portion of the Population (%)&quot;) + 
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, 
+        size = 7)) + scale_y_continuous(breaks = seq(0, 40, 5)) + 
+    labs(fill = &quot;State&quot;) + scale_fill_manual(values = c(&quot;#FCB84D&quot;, 
+    &quot;#FC8A4D&quot;, &quot;#FC554D&quot;, &quot;#FC4D7E&quot;))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> In this plot I've choosen to concentrate on the West Central Southern division of the country, since that is the portion that is most relevant to us in Austin. The plot shows each the proportion of each state that lies in each BMI category. Relative to these other Central Southern states, Texas seems to do slightly better, showing higher numbers in the &quot;normal weight&quot; category and less high numbers in the &quot;obese&quot; category. Arkansas and Oklahoma more or less tie for the poorer end, and Lousiana sits in the middle. Overall, the four states show very similar percentages for each category, adding more evidence to the idea that regional and divisional cuts can show strong similarities in the attributes of their populations. This idea was discussed in the context of diabetes with the last graph, but seems to hold for BMI as well.</p>
+</div>
+<div id="dimensionality-reduction" class="section level2">
+<h2>Dimensionality Reduction</h2>
+<pre class="r"><code>gowertry &lt;- projdata %&gt;% select(1:5)
+gowerr &lt;- gowertry %&gt;% mutate_if(is.character, as.factor) %&gt;% 
+    column_to_rownames(&quot;LocationDesc&quot;)
+gower1 &lt;- daisy(gowerr, metric = &quot;gower&quot;)
+gower2 &lt;- gower1 %&gt;% scale()
+
+sil_width &lt;- vector()
+for (i in 2:10) {
+    pam_fit &lt;- pam(gower2, diss = TRUE, k = i)
+    sil_width[i] &lt;- pam_fit$silinfo$avg.width
+}
+
+ggplot() + geom_line(aes(x = 1:10, y = sil_width)) + scale_x_continuous(name = &quot;k&quot;, 
+    breaks = 1:10)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pam2 &lt;- pam(gower1, k = 2, diss = T)
+plot(pam2, which = 2)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggpairs(gowerr, aes(color = as.factor(pam2$clustering)))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-11-3.png" width="672" style="display: block; margin: auto;" /> For my dimensionality reduction portion of the project, I chose to use PAM to examine my data set in clusters. I decided to reduce my data down to just the principle categorical variable (states) and four of my numerical variables. Namely, the diabetic variable and every BMI variable excluding the category for &quot;underweight.&quot; My correlation heatmap showed the correlation between this excluded variable and percent diabetic to be the most weak, and I thought I might get clearer clusters without it. I used gower distances for the PAM, scaled my data, and used a silhouette width graph to decide on the number of clusers. Since the peak of the graph was highest over &quot;two,&quot; I made two clusers. Looking at the silhouette plot, I found this wasn't exactly a great fit, as my clusters still only constituted a &quot;weak structure&quot; that &quot;could be artificial,&quot; according to the cutoffs for average silhouette widths. The average silhouette width for my clustering was 0.42. I decided to continue on regardless since there was no better cluster group I could choose for the variables I wanted to study.</p>
+<p>To visualize the clustering, I made a table of all pairwise variable combinations. From this table, the most interesting and relavant graphs/correlations were those between percent diabetic and the various BMI categories. It appeared that the red cluster was states with higher obesity and diabetic rates, while the blue cluster was the states with lower rates of diabetes and higher rates for normal weight. The high correlation values between the obese category and the diabetic variable, as well as between the normal weight category and the diabetic category, suggest that there is a strong incidence of higher diabetes rates when obseities rates rise, and a strong incidence of lower diabetes rates when normal weight rates rise.</p>
+<p>To compare and see which states belonged to which clusters, I also printed out a sample list of thirty states with their respective cluster assignments. It seems that these assignments aligned closely with regional assignments, which we know from the plots in the &quot;Visualization&quot; above align closely with differences in attribute rates. This seems to support the identification of the clusters given above.</p>
+<pre class="r"><code>projdata %&gt;% mutate(cluster = pam2$clustering) %&gt;% group_by(cluster, 
+    Region) %&gt;% select(1, 7, 10) %&gt;% arrange(Region) %&gt;% print(n = 30)</code></pre>
+<pre><code>## # A tibble: 50 x 3
+## # Groups:   cluster, Region [8]
+##    LocationDesc         Region    cluster
+##    &lt;chr&gt;                &lt;chr&gt;       &lt;int&gt;
+##  1 Illinois             Midwest         1
+##  2 Indiana              Midwest         1
+##  3 Iowa                 Midwest         1
+##  4 Kansas               Midwest         1
+##  5 Michigan             Midwest         1
+##  6 Minnesota            Midwest         2
+##  7 Missouri             Midwest         1
+##  8 Nebraska             Midwest         1
+##  9 North Dakota         Midwest         1
+## 10 Ohio                 Midwest         1
+## 11 South Dakota         Midwest         1
+## 12 Wisconsin            Midwest         1
+## 13 Connecticut          Northeast       2
+## 14 Maine                Northeast       1
+## 15 Massachusetts        Northeast       2
+## 16 New Hampshire        Northeast       2
+## 17 New York             Northeast       2
+## 18 Pennsylvania         Northeast       1
+## 19 Rhode Island         Northeast       2
+## 20 Vermont              Northeast       2
+## 21 Alabama              South           1
+## 22 Arkansas             South           1
+## 23 Delaware             South           1
+## 24 District of Columbia South           2
+## 25 Florida              South           2
+## 26 Georgia              South           1
+## 27 Kentucky             South           1
+## 28 Louisiana            South           1
+## 29 Maryland             South           1
+## 30 Mississippi          South           1
+## # … with 20 more rows</code></pre>
 </div>
 
             
