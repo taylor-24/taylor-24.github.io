@@ -1,0 +1,23 @@
+---
+title: 'Python 101: My Experiences'
+author: ''
+date: '2020-12-09'
+slug: python-101-my-experiences
+categories: []
+tags: []
+description: ''
+---
+
+I'll say it out right: even though I recognize the wide range of uses for Python and the affection that many have for it, right now it feels clumsy and awkward as I try to make my brain understand it. Still, let's explore some neat stuff.
+
+```{r}
+
+```
+
+Side note: this is real documentation of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:
+
+<center>
+![](/post/2020-12-09-python-101-my-experiences_files/tiredwoman.jpg){width=60% height=60%}
+</center>
+
+

@@ -6,15 +6,15 @@
     <description>Recent content on Taylor Stephenson</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hello World</title>
-      <link>/post/2020/12/04/hello-world/</link>
-      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      <title>Python 101: My Experiences</title>
+      <link>/post/2020/12/09/python-101-my-experiences/</link>
+      <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/12/04/hello-world/</guid>
-      <description> Link to google
-x &amp;lt;- 1 x ## [1] 1 </description>
+      <guid>/post/2020/12/09/python-101-my-experiences/</guid>
+      <description>I&#39;ll say it out right: even though I recognize the wide range of uses for Python and the affection that many have for it, right now it feels clumsy and awkward as I try to make my brain understand it. Still, let&#39;s explore some neat stuff.
+Side note: this is real documentation of me on my third hour of trying to figure out why my regex code isn&#39;t grabbing what I want:</description>
     </item>
     
     <item>
@@ -27,20 +27,9 @@ x &amp;lt;- 1 x ## [1] 1 </description>
     </item>
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015/07/23/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
-    </item>
-    
-    <item>
       <title>Project 1: Health Across the States</title>
       <link>/project/project1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>/project/project1/</guid>
       <description>Introduction This project centers around American health. I first chose two datasets from the CDC&#39;s BRFSS Prevalence &amp;amp; Trends Data, both from 2019. One of these data sets contained information regarding weight using the metric of BMI, specifically examining the percentage of the population in each BMI category by state. The original data included 28 columns, and most of these were formatting for the CDC&#39;s system of display. The variables I used from this data set included state, percentage underweight, percentage normal weight, percentage overweight, and percentage obese.</description>
