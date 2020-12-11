@@ -8,13 +8,68 @@ tags: []
 description: ''
 ---
 
-I'll say it out right: even though I recognize the wide range of uses for Python and the affection that many have for it, right now it feels clumsy and awkward as I try to make my brain understand it. Still, let's explore some neat stuff.
-
-```{r}
-
+```{r, include=FALSE}
+library(tidyverse)
 ```
 
-Side note: this is real documentation of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:
+
+I'll say it out right: even though I recognize the wide range of uses for Python and the affection that many have for it, right now it feels clumsy and awkward as I try to make my brain understand it. Still, let's explore some neat stuff.
+
+One cool feature in R Markdown allows R and Python to communicate by utilizing the reticulate package. 
+
+```{r}
+library(reticulate)
+```
+
+One example of how this could be useful is with tidying. Let's say I'm more comfortable tidying a dataset in R (because I am) but I'm wanting to use the tidied dataset in Python. I can import and tidy the dataset like so:
+```{r}
+obesity <- read.csv("ObeseExport.csv")
+obesity <- obesity %>% select(4,8,12) %>% na.omit
+untidyweight <- obesity %>% pivot_wider(names_from = Response, values_from = Data_Value)
+bmidata <- untidyweight %>% group_by(LocationDesc) %>%  fill(2:5) %>%  distinct() %>% na.omit %>% rename(Obese="Obese (BMI 30.0 - 99.8)")
+```
+
+Then I can go over to Python and play with the dataset:
+```{python}
+bmidata=r.bmidata
+bmidata[bmidata["Obese"] > 37]
+```
+
+Having the two languages talk like this skips any exporting/importing I would have to do otherwise, which is super neat and convinent!
+
+Continuing with the use of python, in class we learned how to create and work with dictionaries. Dictionaries are collections of key:value pairs. Here is an example of a simple dictionary about the Strange Planet comics by author Nathan Pyle.
+
+```{python}
+comic_dict = {
+'Name': 'Strange Planet',
+'Author': 'Nathan Pyle',
+'characters': ['beings','creatures'],
+'social media': '@nathanwpylestrangeplanet'
+}
+```
+
+After defining this, if I want to access the value for who authors the comics, I simply run:
+```{python}
+comic_dict['Author']
+```
+
+In the last section of this blog post, I will discuss the indexing function in Python. 
+
+In Python, the element in the first position is actually in position 0. So, if I have a list of the states beginning with A in alphabetical order and I want to find out what the first state is, I have to run state[0] as shown here:
+
+```{python}
+states=['Alabama','Alaska','Arizona','Arkansas']
+states[0]
+```
+
+If I want to find out what the last state is, I can simply run states[-1]. This is helpful because it means I can access the ends of my lists without knowing how many elements are in the list.
+```{python}
+states[-1]
+```
+
+Although this doesn't cover the complexities of python slicing and the like, it's all I'm going to cover for today. Thanks for reading my little introduction to some of the aspects of Python!
+
+Side note: this is real documentation (and definitely not a stock photo) of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:
 
 <center>
 ![](/post/2020-12-09-python-101-my-experiences_files/tiredwoman.jpg){width=60% height=60%}

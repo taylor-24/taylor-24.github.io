@@ -14,7 +14,8 @@
       
       <guid>/post/2020/12/09/python-101-my-experiences/</guid>
       <description>I&#39;ll say it out right: even though I recognize the wide range of uses for Python and the affection that many have for it, right now it feels clumsy and awkward as I try to make my brain understand it. Still, let&#39;s explore some neat stuff.
-Side note: this is real documentation of me on my third hour of trying to figure out why my regex code isn&#39;t grabbing what I want:</description>
+One cool feature in R Markdown allows R and Python to communicate by utilizing the reticulate package.
+library(reticulate) One example of how this could be useful is with tidying.</description>
     </item>
     
     <item>

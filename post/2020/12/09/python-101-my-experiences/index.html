@@ -73,7 +73,46 @@
 
 
 <p>I'll say it out right: even though I recognize the wide range of uses for Python and the affection that many have for it, right now it feels clumsy and awkward as I try to make my brain understand it. Still, let's explore some neat stuff.</p>
-<p>Side note: this is real documentation of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:</p>
+<p>One cool feature in R Markdown allows R and Python to communicate by utilizing the reticulate package.</p>
+<pre class="r"><code>library(reticulate)</code></pre>
+<p>One example of how this could be useful is with tidying. Let's say I'm more comfortable tidying a dataset in R (because I am) but I'm wanting to use the tidied dataset in Python. I can import and tidy the dataset like so:</p>
+<pre class="r"><code>obesity &lt;- read.csv(&quot;ObeseExport.csv&quot;)
+obesity &lt;- obesity %&gt;% select(4,8,12) %&gt;% na.omit
+untidyweight &lt;- obesity %&gt;% pivot_wider(names_from = Response, values_from = Data_Value)
+bmidata &lt;- untidyweight %&gt;% group_by(LocationDesc) %&gt;%  fill(2:5) %&gt;%  distinct() %&gt;% na.omit %&gt;% rename(Obese=&quot;Obese (BMI 30.0 - 99.8)&quot;)</code></pre>
+<p>Then I can go over to Python and play with the dataset:</p>
+<pre class="python"><code>bmidata=r.bmidata
+bmidata[bmidata[&quot;Obese&quot;] &gt; 37]</code></pre>
+<pre><code>##      LocationDesc  Obese  Overweight (BMI 25.0-29.9)  \
+## 5        Arkansas   37.4                        33.2   
+## 26    Mississippi   40.8                        31.9   
+## 49  West Virginia   39.7                        32.3   
+## 
+##     Normal Weight (BMI 18.5-24.9)  Underweight (BMI 12.0-18.4)  
+## 5                            27.8                          1.6  
+## 26                           25.4                          1.9  
+## 49                           25.9                          2.1</code></pre>
+<p>Having the two languages talk like this skips any exporting/importing I would have to do otherwise, which is super neat and convinent!</p>
+<p>Continuing with the use of python, in class we learned how to create and work with dictionaries. Dictionaries are collections of key:value pairs. Here is an example of a simple dictionary about the Strange Planet comics by author Nathan Pyle.</p>
+<pre class="python"><code>comic_dict = {
+&#39;Name&#39;: &#39;Strange Planet&#39;,
+&#39;Author&#39;: &#39;Nathan Pyle&#39;,
+&#39;characters&#39;: [&#39;beings&#39;,&#39;creatures&#39;],
+&#39;social media&#39;: &#39;@nathanwpylestrangeplanet&#39;
+}</code></pre>
+<p>After defining this, if I want to access the value for who authors the comics, I simply run:</p>
+<pre class="python"><code>comic_dict[&#39;Author&#39;]</code></pre>
+<pre><code>## &#39;Nathan Pyle&#39;</code></pre>
+<p>In the last section of this blog post, I will discuss the indexing function in Python.</p>
+<p>In Python, the element in the first position is actually in position 0. So, if I have a list of the states beginning with A in alphabetical order and I want to find out what the first state is, I have to run state[0] as shown here:</p>
+<pre class="python"><code>states=[&#39;Alabama&#39;,&#39;Alaska&#39;,&#39;Arizona&#39;,&#39;Arkansas&#39;]
+states[0]</code></pre>
+<pre><code>## &#39;Alabama&#39;</code></pre>
+<p>If I want to find out what the last state is, I can simply run states[-1]. This is helpful because it means I can access the ends of my lists without knowing how many elements are in the list.</p>
+<pre class="python"><code>states[-1]</code></pre>
+<pre><code>## &#39;Arkansas&#39;</code></pre>
+<p>Although this doesn't cover the complexities of python slicing and the like, it's all I'm going to cover for today. Thanks for reading my little introduction to some of the aspects of Python!</p>
+<p>Side note: this is real documentation (and definitely not a stock photo) of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:</p>
 <center>
 <img src="../../../../../post/2020-12-09-python-101-my-experiences_files/tiredwoman.jpg" style="width:60.0%" style="height:60.0%" />
 </center>
