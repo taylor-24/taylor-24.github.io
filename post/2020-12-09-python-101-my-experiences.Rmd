@@ -69,7 +69,7 @@ states[-1]
 
 Although this doesn't cover the complexities of python slicing and the like, it's all I'm going to cover for today. Thanks for reading my little introduction to some of the aspects of Python!
 
-Side note: this is real documentation (and definitely not a stock photo) of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:
+Side note: this is real documentation™ of me on my third hour of trying to figure out why my regex code isn't grabbing what I want:
 
 <center>
 ![](/post/2020-12-09-python-101-my-experiences_files/tiredwoman.jpg){width=60% height=60%}
